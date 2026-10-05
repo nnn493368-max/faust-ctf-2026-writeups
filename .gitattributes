@@ -1,0 +1,15 @@
+# Normalise line endings so the repo does not churn on Windows.
+* text=auto eol=lf
+
+# Windows-only scripts keep CRLF.
+*.ps1 text eol=crlf
+*.cmd text eol=crlf
+
+# Binary assets are never touched.
+*.png binary
+*.jpg binary
+*.pdf binary
+*.swf binary
+
+# Markdown diffs stay readable.
+*.md text eol=lf
