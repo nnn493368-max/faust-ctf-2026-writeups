@@ -73,9 +73,12 @@ CTFtime 上队伍 `qiyu` 的 "Team members" **现在一个成员都没有**：
 
 ### ④ 自己的公开产出
 
+**推荐引用"内容固定"的快照**（commit 不可变，快照永不过期）：
+
 ```
-仓库      https://github.com/nnn493368-max/faust-ctf-2026-writeups
-快照      由 archive-evidence.ps1 维护（不要硬编码时间戳 —— 每次 push 都会让它过期）
+仓库树   https://web.archive.org/web/20261005162246/https://github.com/nnn493368-max/faust-ctf-2026-writeups/tree/65e44ebe81a83cb08eb3fb858740ee056a747ee3
+本文档   https://web.archive.org/web/20261005162322/https://github.com/nnn493368-max/faust-ctf-2026-writeups/blob/65e44ebe81a83cb08eb3fb858740ee056a747ee3/EVIDENCE.md
+仓库     https://github.com/nnn493368-max/faust-ctf-2026-writeups
 ```
 
 三篇 writeup（IMC 三漏洞链 / Lamp TeX 头注入 / Rufflecopter AVM2 逆向）+ 能跑的 exploit 代码。
@@ -85,8 +88,10 @@ CTFtime 上队伍 `qiyu` 的 "Team members" **现在一个成员都没有**：
 
 **它证明不了什么**：单靠一个仓库，无法排除"别人写完挂你名下"。所以它是**佐证**，不是主证。
 
-> 为什么这里不写死快照时间戳：本文件本身也在仓库里，一旦写死就形成
-> "改文件 → 快照过期 → 再改文件"的循环。用 `archive-evidence.ps1` 随时查最新的即可。
+> **为什么引用 commit URL 而不是分支 URL**：分支（`/tree/main`）的内容会随每次 push 变化，
+> 而 Internet Archive 对同一 URL 有**去重窗口** —— 短时间内不会重抓，于是"分支快照"永远
+> 落后一两个提交。commit URL 的内容是不可变的，不存在这个问题。
+> 实测过：push 之后立刻重存 `/tree/main`，返回的仍是 push 之前的旧快照。
 
 ### ⑤ 主办方注册记录 ← 需要时去找
 

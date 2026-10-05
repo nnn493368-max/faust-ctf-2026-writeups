@@ -31,6 +31,16 @@ $Targets = @(
     @{ Url = 'https://github.com/nnn493368-max/faust-ctf-2026-writeups'; What = 'our writeups repo' }
 )
 
+# Also archive the CURRENT COMMIT, pinned by SHA. A branch URL (/tree/main) changes
+# on every push while the Internet Archive de-duplicates per URL, so a branch snapshot
+# is always one or two commits stale. A commit URL is immutable - no such problem.
+$RepoBase = 'https://github.com/nnn493368-max/faust-ctf-2026-writeups'
+$head = (& git -C $PSScriptRoot rev-parse HEAD 2>$null | Out-String).Trim()
+if ($head) {
+    $Targets += @{ Url = "$RepoBase/tree/$head";       What = "repo at commit $($head.Substring(0,7)) (immutable)" }
+    $Targets += @{ Url = "$RepoBase/blob/$head/EVIDENCE.md"; What = 'EVIDENCE.md at that commit' }
+}
+
 function Get-Snapshot($url) {
     # Use the CDX API, not the availability API: the latter is served from a cache
     # and keeps reporting "[none]" for minutes after a successful fresh save.
