@@ -27,7 +27,8 @@ $Targets = @(
     @{ Url = 'https://2026.faustctf.net/competition/scoreboard/';     What = 'official scoreboard page' }
     @{ Url = 'https://ctftime.org/event/3312';                        What = 'CTFtime event' }
     @{ Url = 'https://ctftime.org/event/3312/tasks/';                 What = 'CTFtime event tasks' }
-    @{ Url = 'https://ctftime.org/team/449998';                       What = 'CTFtime team (join it first!)' }
+    @{ Url = 'https://ctftime.org/team/449998';                       What = 'CTFtime team (member list lives here)' }
+    @{ Url = 'https://ctftime.org/user/275322';                       What = 'CTFtime user profile (person -> team)' }
     @{ Url = 'https://github.com/nnn493368-max/faust-ctf-2026-writeups'; What = 'our writeups repo' }
 )
 
