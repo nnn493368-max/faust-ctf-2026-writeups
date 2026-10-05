@@ -17,6 +17,11 @@ This repository is the technical record of the four services we attacked. Everyt
 was derived by **reading the provided sources and bytecode**, not by fuzzing, and every
 negative result is stated as a negative result.
 
+> **Verifying these results:** [`EVIDENCE.md`](EVIDENCE.md) documents the full chain of
+> evidence — the organizers' frozen `scoreboard.json` (with a third-party Internet Archive
+> snapshot and a SHA256 anyone can check), the CTFtime record, and what each source does and
+> does not prove. `archive-evidence.ps1` re-freezes those public pages on demand.
+
 ---
 
 ## The writeups
