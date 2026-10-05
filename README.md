@@ -21,6 +21,10 @@ negative result is stated as a negative result.
 > evidence — the organizers' frozen `scoreboard.json` (with a third-party Internet Archive
 > snapshot and a SHA256 anyone can check), the CTFtime record, and what each source does and
 > does not prove. `archive-evidence.ps1` re-freezes those public pages on demand.
+>
+> **Short on time?** [`PORTFOLIO.md`](PORTFOLIO.md) ([PDF](PORTFOLIO.pdf)) is a two-minute
+> summary of this work aimed at a reviewer: results, deliverables, the three technical
+> highlights, and the engineering boundaries.
 
 ---
 
@@ -28,7 +32,7 @@ negative result is stated as a negative result.
 
 | Service | Topic | Score impact |
 |---|---|---|
-| **[IMC](writeups/imc.md)** | Three chained bugs → full cross-tenant flag read (SQLite double-quote fallback · `catch` without `return` · missing NULL guard) + a LIKE-pattern oracle | **6,726 / 6,737 of our offense** |
+| **[IMC](writeups/imc.md)** | Three chained bugs → full cross-tenant flag read (SQLite double-quote fallback · `catch` without `return` · missing NULL guard) + a LIKE-pattern oracle | **6,726.31 / 6,737.16 of our offense (99.8%)** |
 | **[Lamp](writeups/lamp.md)** | Unauthenticated arbitrary file read via TeX header macro injection (`Path:` overrides `\httpPath` **after** the traversal check) | 0 — verified primitive, no enumeration path |
 | **[Rufflecopter](writeups/rufflecopter.md)** | Full AVM2 reverse of an HTTP server written in ActionScript: 2-D collision routing, a three-plane QR steganogram decoder, and why the gate bypass we found still can't read the flag | 0 — complete understanding, no primitive |
 
@@ -103,7 +107,7 @@ first Attack/Defense post-mortem:
 
 三篇 writeup 均为**中文全文 + English abstract**：
 
-- **IMC** —— 三个漏洞串联成完整的跨租户读旗原语。这也是我们 6,737 进攻分里 **6,726 分的来源**。
+- **IMC** —— 三个漏洞串联成完整的跨租户读旗原语。这也是我们 6,737.16 进攻分里 **6,726.31 分的来源（99.8%）**。
   三个 bug 分别是：SQLite 双引号标识符回退（`SET crew = "age"` 实际是列引用）、
   `update.neko` 的 `catch` 缺 `return`（邀请校验被穿透）、
   `fetch.neko` 的 SPACESHIP 过滤缺 `null` 守卫（`null == null` 为真，一条 FETCH 拿走全部旗船）。

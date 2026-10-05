@@ -1,0 +1,14 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+
+# Build artefacts from make-pdf.py
+*.pdf.tmp
+*._tmp.html
+
+# Editors / OS
+.vscode/
+.idea/
+Thumbs.db
+desktop.ini

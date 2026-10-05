@@ -72,22 +72,36 @@ for k, v in facts.items():
     print(f"  {k:14} = {v}")
 print(f"  IMC 占进攻分比例 = {imc_share:.1f}%")
 
-readme = open(os.path.join(R, "README.md"), encoding="utf-8").read()
-checks = [
-    ("67 / 502", "排名", True),
-    ("10,752.81", "总分", True),
-    ("6,737.16", "进攻", True),
-    ("5,069.72", "防守(绝对值)", True),
-    ("9,085.37", "SLA", True),
-    ("13.3%", "百分位", True),
-    ("86.7%", "击败比例", True),
-    ("6,726", "IMC 进攻分取整", True),
+# 两份对外文档都必须与官方数据一致 —— 否则"文档里的数字可机器校验"这句话就不成立。
+# 注意：这里用从 scoreboard 现算出来的值拼接，而不是把数字写死，
+# 这样官方数据一变（或我手滑改错），检查立刻失败。
+fmt = lambda v: f"{v:,.2f}"
+doc_checks = [
+    ("67 / 502", "排名"),
+    (fmt(facts["total"]), "总分"),
+    (fmt(facts["offense"]), "进攻"),
+    (f"{abs(facts['defense']):,.2f}", "防守(绝对值)"),
+    (fmt(facts["sla"]), "SLA"),
+    (f"{facts['rank'] / facts['teams'] * 100:.1f}%", "百分位"),
+    (f"{facts['imc_offense']:,.2f}", "IMC 进攻分"),
+    (f"{imc_share:.1f}%", "IMC 占比"),
 ]
-for needle, why, want in checks:
-    present = needle in readme
-    good = present == want
+for doc in ("README.md", "PORTFOLIO.md"):
+    path = os.path.join(R, doc)
+    if not os.path.exists(path):
+        continue
+    text = open(path, encoding="utf-8").read()
+    for needle, why in doc_checks:
+        good = needle in text
+        ok &= good
+        print(f"  {'OK  ' if good else 'BAD '}  {doc} 含 {needle!r} ({why})")
+
+# README 特有：这两个数字只出现在 README 的行文里
+readme = open(os.path.join(R, "README.md"), encoding="utf-8").read()
+for needle, why in [("86.7%", "击败比例"), ("6,726", "IMC 进攻分取整")]:
+    good = needle in readme
     ok &= good
-    print(f"  {'OK  ' if good else 'BAD '}  README 含 {needle!r} ({why}) = {present}")
+    print(f"  {'OK  ' if good else 'BAD '}  README.md 含 {needle!r} ({why})")
 
 # ---------- 3) 相对链接 ----------
 print("\n=== 3) 相对链接可解析 ===")
